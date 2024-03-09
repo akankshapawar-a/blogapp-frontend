@@ -1,6 +1,34 @@
-import React from "react";
+"use client"
+
+import React, { useState } from "react";
+import toast from 'react-hot-toast';
 
 const Signup = () => {
+  const [fromData, setFromdata] = useState('');
+
+  const Signup = async()=>{
+    try {
+      const response = await fetch('http://localhost:5000/signup',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email:'sanketghogare@gmail.com',
+          password:"123",
+        })
+      });
+      console.log("respose", response);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+    toast.success("user signup successfully");
+    } catch (error) {
+      toast.error("error while fetch the data");
+    }
+  }
   return (
     <>
       <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
